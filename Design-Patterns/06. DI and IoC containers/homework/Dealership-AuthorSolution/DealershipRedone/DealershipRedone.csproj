@@ -84,7 +84,7 @@
     <Compile Include="Engine\DealershipEngine.cs" />
     <Compile Include="Engine\ICommand.cs" />
     <Compile Include="Engine\IEngine.cs" />
-    <Compile Include="Factories\DealershipFactory.cs" />
+    <Compile Include="Factories\ICommandFactory.cs" />
     <Compile Include="Factories\IDealershipFactory.cs" />
     <Compile Include="InputOutputProvider\ConsoleInputOutputProvider.cs" />
     <Compile Include="InputOutputProvider\IInputOutputProvider.cs" />

@@ -1,9 +1,11 @@
-﻿namespace Dealership.Engine
+﻿using Dealership.Factories;
+
+namespace Dealership.Engine
 {
     public interface IEngine
     {
         void Start();
 
-        void Reset();
+        void Reset(IDealershipFactory factory);
     }
 }
