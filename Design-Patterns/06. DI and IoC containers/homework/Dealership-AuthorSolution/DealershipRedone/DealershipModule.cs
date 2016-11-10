@@ -21,34 +21,56 @@ namespace DealershipRedone
     {
         public override void Load()
         {
-            Kernel.Bind(x =>
-            {
-                x.FromAssembliesInPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
-                .SelectAllClasses()
-                .BindDefaultInterface();
-            });
+            Kernel.Bind<ICommand>().To<Command>();
 
-            Bind<IVehicle>().To<Vehicle>();
+            Kernel.Bind<IVehicle>().To<Vehicle>();
 
-            Bind<ICar>().To<Car>();
+            Kernel.Bind<ICar>().To<Car>();
 
-            Bind<ITruck>().To<Truck>();
+            Kernel.Bind<ITruck>().To<Truck>();
 
-            Bind<IMotorcycle>().To<Motorcycle>();
+            Kernel.Bind<IMotorcycle>().To<Motorcycle>();
 
-            Bind<IUser>().To<User>();
+            Kernel.Bind<IComment>().To<Comment>();
 
-            Bind<ICommand>().To<Command>();
+            Kernel.Bind<IUser>().To<User>();
 
-            Bind<IComment>().To<Comment>();
+            Kernel.Bind<IInputOutputProvider>().To<ConsoleInputOutputProvider>();
 
-            Bind<IInputOutputProvider>().To<ConsoleInputOutputProvider>().InSingletonScope();
+            Kernel.Bind<IEngine>().To<DealershipEngine>().InSingletonScope();
 
-            Bind<IEngine>().To<DealershipEngine>().InSingletonScope();
+            Kernel.Bind<ICommandFactory>().ToFactory().InSingletonScope();
 
-            Bind<IDealershipFactory>().ToFactory().InSingletonScope();
+            Kernel.Bind<IDealershipFactory>().ToFactory().InSingletonScope();
 
-            Bind<ICommandFactory>().ToFactory().InSingletonScope();
+            //Kernel.Bind(x =>
+            //{
+            //    x.FromAssembliesInPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+            //    .SelectAllClasses()
+            //    .BindDefaultInterface();
+            //});
+
+            //Bind<IVehicle>().To<Vehicle>();
+
+            //Bind<ICar>().To<Car>();
+
+            //Bind<ITruck>().To<Truck>();
+
+            //Bind<IMotorcycle>().To<Motorcycle>();
+
+            //Bind<IUser>().To<User>();
+
+            //Bind<ICommand>().To<Command>();
+
+            //Bind<IComment>().To<Comment>();
+
+            //Bind<IInputOutputProvider>().To<ConsoleInputOutputProvider>().InSingletonScope();
+
+            //Bind<IEngine>().To<DealershipEngine>().InSingletonScope();
+
+            //Bind<IDealershipFactory>().ToFactory().InSingletonScope();
+
+            //Bind<ICommandFactory>().ToFactory().InSingletonScope();
         }
     }
 }

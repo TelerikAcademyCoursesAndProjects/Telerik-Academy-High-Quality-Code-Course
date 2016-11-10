@@ -44,7 +44,7 @@ namespace Dealership.Engine
         private IDealershipFactory dealershipFactory;
         private ICommandFactory commandFactory;
 
-        private DealershipEngine(IInputOutputProvider inputOutputProvider, IDealershipFactory dealershipFactory, ICommandFactory commandFactory)
+        public DealershipEngine(IInputOutputProvider inputOutputProvider, IDealershipFactory dealershipFactory, ICommandFactory commandFactory)
         {
             this.users = new List<IUser>();
             this.loggedUser = null;
@@ -79,8 +79,7 @@ namespace Dealership.Engine
 
             while (!string.IsNullOrEmpty(currentLine))
             {
-                
-                var currentCommand = new Command(currentLine);
+                var currentCommand = this.commandFactory.CreateCommand(currentLine);
                 commands.Add(currentCommand);
 
                 currentLine = this.inputOutputProvider.ReadLineInput();
@@ -251,15 +250,15 @@ namespace Dealership.Engine
 
             if (type == VehicleType.Car)
             {
-                vehicle = this.dealershipFactory.CreateCar(make, model, price, int.Parse(additionalParam));
+                vehicle = (IVehicle)this.dealershipFactory.CreateCar(make, model, price, int.Parse(additionalParam));
             }
             else if (type == VehicleType.Motorcycle)
             {
-                vehicle = this.dealershipFactory.CreateMotorcycle(make, model, price, additionalParam);
+                vehicle = (IVehicle)this.dealershipFactory.CreateMotorcycle(make, model, price, additionalParam);
             }
             else if (type == VehicleType.Truck)
             {
-                vehicle = this.dealershipFactory.CreateTruck(make, model, price, int.Parse(additionalParam));
+                vehicle = (IVehicle)this.dealershipFactory.CreateTruck(make, model, price, int.Parse(additionalParam));
             }
 
             this.loggedUser.AddVehicle(vehicle);
