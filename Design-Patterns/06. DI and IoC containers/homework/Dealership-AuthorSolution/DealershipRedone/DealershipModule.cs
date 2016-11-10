@@ -24,11 +24,7 @@ namespace DealershipRedone
                 .BindDefaultInterface();
             });
 
-
-           // Bind<IInputOutputProvider>().To<ConsoleInputOutputProvider>().InSingletonScope();
-
-            var kur = Kernel.Get<ConsoleInputOutputProvider>();
-            kur.WriteLineOutput("Hvanah mu cakata");
+          Bind<IInputOutputProvider>().To<ConsoleInputOutputProvider>().InSingletonScope();
             
         }
     }
