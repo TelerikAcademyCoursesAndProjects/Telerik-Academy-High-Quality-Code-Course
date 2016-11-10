@@ -49,7 +49,6 @@ namespace DealershipRedone
             Bind<IDealershipFactory>().ToFactory().InSingletonScope();
 
             Bind<ICommandFactory>().ToFactory().InSingletonScope();
-
         }
     }
 }
