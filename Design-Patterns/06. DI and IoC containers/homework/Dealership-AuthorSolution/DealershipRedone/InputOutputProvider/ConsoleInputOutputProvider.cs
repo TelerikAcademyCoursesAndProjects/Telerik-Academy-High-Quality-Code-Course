@@ -8,6 +8,7 @@ namespace DealershipRedone.InputOutputProvider
         {
             return Console.ReadLine();
         }
+
         public int ReadInput()
         {
             return Console.Read();
