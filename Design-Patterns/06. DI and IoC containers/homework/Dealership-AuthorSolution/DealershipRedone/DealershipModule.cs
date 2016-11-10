@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using DealershipRedone.InputOutputProvider;
+using Ninject;
 using Ninject.Extensions.Conventions;
 using Ninject.Extensions.Factory;
 using Ninject.Extensions.Interception.Infrastructure.Language;
@@ -22,6 +23,13 @@ namespace DealershipRedone
                 .SelectAllClasses()
                 .BindDefaultInterface();
             });
+
+
+           // Bind<IInputOutputProvider>().To<ConsoleInputOutputProvider>().InSingletonScope();
+
+            var kur = Kernel.Get<ConsoleInputOutputProvider>();
+            kur.WriteLineOutput("Hvanah mu cakata");
+            
         }
     }
 }

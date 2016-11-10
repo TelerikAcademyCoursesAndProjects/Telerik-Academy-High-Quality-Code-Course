@@ -2,6 +2,7 @@
 using Dealership.Common.Enums;
 using Dealership.Contracts;
 using Dealership.Factories;
+using DealershipRedone.InputOutputProvider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,25 +37,17 @@ namespace Dealership.Engine
         private const string CommentDoesNotExist = "The comment does not exist!";
         private const string VehicleDoesNotExist = "The vehicle does not exist!";
 
-        private static readonly IEngine SingleInstance = new DealershipEngine();
-
         private IDealershipFactory factory;
         private ICollection<IUser> users;
         private IUser loggedUser;
+        private IInputOutputProvider inputOutputProvider;
 
-        private DealershipEngine()
+        private DealershipEngine(IInputOutputProvider inputOutputProvider)
         {
             this.factory = new DealershipFactory();
             this.users = new List<IUser>();
             this.loggedUser = null;
-        }
-
-        public static IEngine Instance
-        {
-            get
-            {
-                return SingleInstance;
-            }
+            this.inputOutputProvider = inputOutputProvider;
         }
 
         public void Start()
@@ -79,14 +72,15 @@ namespace Dealership.Engine
         {
             var commands = new List<ICommand>();
 
-            var currentLine = Console.ReadLine();
+            var currentLine = this.inputOutputProvider.ReadLineInput();
 
             while (!string.IsNullOrEmpty(currentLine))
             {
+                
                 var currentCommand = new Command(currentLine);
                 commands.Add(currentCommand);
 
-                currentLine = Console.ReadLine();
+                currentLine = this.inputOutputProvider.ReadLineInput();
             }
 
             return commands;
@@ -122,7 +116,7 @@ namespace Dealership.Engine
                 output.AppendLine(new string('#', 20));
             }
 
-            Console.Write(output.ToString());
+            this.inputOutputProvider.WriteOutput(output.ToString());    
         }
 
         private string ProcessSingleCommand(ICommand command)
