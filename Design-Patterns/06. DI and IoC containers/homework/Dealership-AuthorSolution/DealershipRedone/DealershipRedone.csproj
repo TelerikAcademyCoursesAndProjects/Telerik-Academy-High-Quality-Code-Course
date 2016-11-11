@@ -86,8 +86,10 @@
     <Compile Include="Engine\IEngine.cs" />
     <Compile Include="Factories\ICommandFactory.cs" />
     <Compile Include="Factories\IDealershipFactory.cs" />
-    <Compile Include="InputOutputProvider\ConsoleInputOutputProvider.cs" />
-    <Compile Include="InputOutputProvider\IInputOutputProvider.cs" />
+    <Compile Include="InputOutputProvider\ConsoleInputProvider.cs" />
+    <Compile Include="InputOutputProvider\IInputProvider.cs" />
+    <Compile Include="InputOutputProvider\IOutputProvider.cs" />
+    <Compile Include="InputOutputProvider\ConsoleOutputProvider.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Motorcycle.cs" />

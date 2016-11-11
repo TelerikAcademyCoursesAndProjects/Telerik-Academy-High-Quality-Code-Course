@@ -35,7 +35,9 @@ namespace DealershipRedone
 
             Kernel.Bind<IUser>().To<User>();
 
-            Kernel.Bind<IInputOutputProvider>().To<ConsoleInputOutputProvider>();
+            Kernel.Bind<IInputProvider>().To<ConsoleInputProvider>();
+
+            Kernel.Bind<IOutputProvider>().To<ConsoleOutputProvider>();
 
             Kernel.Bind<IEngine>().To<DealershipEngine>().InSingletonScope();
 
