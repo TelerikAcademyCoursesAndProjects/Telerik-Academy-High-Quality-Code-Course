@@ -40,15 +40,17 @@ namespace Dealership.Engine
 
         private ICollection<IUser> users;
         private IUser loggedUser;
-        private IInputOutputProvider inputOutputProvider;
+        private IInputProvider inputProvider;
+        private IOutputProvider outputProvider;
         private IDealershipFactory dealershipFactory;
         private ICommandFactory commandFactory;
 
-        public DealershipEngine(IInputOutputProvider inputOutputProvider, IDealershipFactory dealershipFactory, ICommandFactory commandFactory)
+        public DealershipEngine(IInputProvider inputProvider, IOutputProvider outputProvider, IDealershipFactory dealershipFactory, ICommandFactory commandFactory)
         {
             this.users = new List<IUser>();
             this.loggedUser = null;
-            this.inputOutputProvider = inputOutputProvider;
+            this.inputProvider = inputProvider;
+            this.outputProvider = outputProvider;
             this.dealershipFactory = dealershipFactory;
             this.commandFactory = commandFactory;
         }
@@ -75,14 +77,14 @@ namespace Dealership.Engine
         {
             var commands = new List<ICommand>();
 
-            var currentLine = this.inputOutputProvider.ReadLineInput();
+            var currentLine = this.inputProvider.ReadLineInput();
 
             while (!string.IsNullOrEmpty(currentLine))
             {
                 var currentCommand = this.commandFactory.CreateCommand(currentLine);
                 commands.Add(currentCommand);
 
-                currentLine = this.inputOutputProvider.ReadLineInput();
+                currentLine = this.inputProvider.ReadLineInput();
             }
 
             return commands;
@@ -118,7 +120,7 @@ namespace Dealership.Engine
                 output.AppendLine(new string('#', 20));
             }
 
-            this.inputOutputProvider.WriteOutput(output.ToString());    
+            this.outputProvider.WriteOutput(output.ToString());    
         }
 
         private string ProcessSingleCommand(ICommand command)
